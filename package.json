@@ -1,0 +1,23 @@
+{
+  "name": "app-lania",
+  "version": "1.0.0",
+  "description": "Laboratorium ANalysIs Application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leamarsela/lania.git"
+  },
+  "author": "LM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leamarsela/lania/issues"
+  },
+  "homepage": "https://github.com/leamarsela/lania#readme",
+  "dependencies": {
+    "electron": "^10.1.1"
+  }
+}
