@@ -4,95 +4,137 @@ const url = require('url');
 
 const { app, BrowserWindow, Menu, ipcMain } = electron;
 
-// set ENV
-process.env.NODE_ENV = 'production';
+const dbcontainer = require('./dbmenu/js/dbContainer.js');
+const dbproject = require('./dbmenu/js/dbProject.js');
+const dbringgamma = require('./dbmenu/js/dbRingGamma.js');
+const dbpycnometer = require('./dbmenu/js/dbPycnometer.js');
 
-let mainWindow;
+// set ENV
+// process.env.NODE_ENV = 'production';
+
+let parentWindow;
 
 // listen for app to be ready
 app.on('ready', () => {
-    // create new window
-    mainWindow = new BrowserWindow({
-        webPreferences: {
-            nodeIntegration: true
-        }
-    });
+  // create new window
+  parentWindow = new BrowserWindow({
+    fullscreen: true,
+    webPreferences: {
+        nodeIntegration: true
+    }
+  });
 
-    // load html into window
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
-        protocol: 'file',
-        slashes: true
-    }));
+  // load html into window
+  parentWindow.loadURL(url.format({
+      pathname: path.join(__dirname, 'index.html'),
+      protocol: 'file',
+      slashes: true
+  }));
 
-    // quit app when closed
-    mainWindow.on('closed', () => {
-        app.quit();
-    });
+  // quit app when closed
+  parentWindow.on('closed', () => {
+      app.quit();
+  });
 
-    // build menu from template
-    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+  // build menu from template
+  const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
 
-    // insert menu
-    Menu.setApplicationMenu(mainMenu);
+  // insert menu
+  Menu.setApplicationMenu(mainMenu);
 });
-
-
-let addWindow;
-
-// handle create add window
-const createAddWindow = () => {
-    // create new window
-    addWindow = new BrowserWindow({
-        width: 300,
-        height: 200,
-        title: 'Add Items',
-        webPreferences: {
-            nodeIntegration: true
-        }
-    });
-
-    // load html into window
-    addWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'addWindow.html'),
-        protocol: 'file',
-        slashes: true
-    }));
-
-    // garbage collection handle
-    addWindow.on('close', () => {
-        addWindow = null;
-    });
-};
-
 
 
 // create menu template
 const mainMenuTemplate = [
-    {
-        label: 'File',
+  {
+    label: 'File',
+    submenu: [
+      {
+        label: 'Project',
+        click() {
+          dbproject.dbProject();
+        }
+      },
+      {
+        label: 'Database',
         submenu: [
-            {
-                label: 'Add Item',
-                click() {
-                    createAddWindow();
-                }
-            },
-            {
-                label: 'Clear Items',
-                click() {
-                    mainWindow.webContents.send('item:clear');
-                }
-            },
-            {
-                label: 'Quit',
-                accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
-                click() {
-                    app.quit();
-                }
+          {
+            label: 'Container',
+            click() {
+              dbcontainer.dbContainer();
             }
+          },
+          {
+            label: 'Ring Gamma',
+            click() {
+              dbringgamma.dbRingGamma();
+            }
+          },
+          {
+            label: 'Pycnometer',
+            click() {
+              dbpycnometer.dbPycnometer();
+            }
+          },
+          {
+            label: 'Mold',
+            click() {
+              console.log('Mold');
+            }
+          },
+          {
+            label: 'CBR',
+            click() {
+              console.log('cbr');
+            }
+          },
+          {
+            label: 'consolidation',
+            click() {
+              console.log('consolidation');
+            }
+          }
         ]
-    }
+      },
+      {
+        label: 'Clear Items',
+        click() {
+            mainWindow.webContents.send('item:clear');
+        }
+      },
+      {
+        label: 'Quit',
+        accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
+        click() {
+            app.quit();
+        }
+      }
+    ]
+  },
 ];
 
+
+// for mac add empty object to menu
+if(process.platform == 'darwin') {
+    mainMenuTemplate.unshift({});
+}
+
+// add developer tools item
+if(process.env.NODE_ENV !== 'production') {
+  mainMenuTemplate.push({
+    label: 'Developer Tools',
+    submenu: [
+      {
+        label: 'Toggle DevTools',
+        accelerator: process.platform == 'Darwin' ? 'Command+I' : 'Ctrl+I',
+        click(item, focuseWindow) {
+            focuseWindow.toggleDevTools();
+        }
+      },
+      {
+        role: 'reload'
+      }
+    ]
+  })
+}
 

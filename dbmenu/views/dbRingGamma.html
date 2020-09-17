@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Ring Gamma</title>
+</head>
+<body>
+  <h1>Data Ring Gamma</h1>
+  <div class="container">
+    <form>
+        <div>
+            <label>id ring gamma</label>
+            <input type="text" id="id_ring_gamma" autofocus><br>
+            <label>weight ring gamma</label>
+            <input type="text" id="weight_ring_gamma"><br>
+            <label>diameter ring gamma</label>
+            <input type="text" id="diameter_ring_gamma"><br>
+            <label>thick ring gamma</label>
+            <input type="text" id="thick_ring_gamma">
+        </div>
+        <button type="submit">
+            <i>send</i>
+        </button>
+    </form>
+  </div>
+
+  <div id="data">
+
+  </div>
+
+  <script>
+    const { inputData } = require('../controllers/ringGamma.js');
+
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      inputData();
+    });
+  </script>
+</body>
+</html>

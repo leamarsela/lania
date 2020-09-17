@@ -1,11 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+    <title>Lania</title>
+    <style>
+        .page-footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h1>Index HTML</h1>
+    <nav>
+        <div class="nav-wrapper">
+            <a class="brand-logo center">Calculation</a>
+        </div>
+    </nav>
+    <ul></ul>
+    <br>
+    <br>
+
+    <footer class="page-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col l6 s12">
+              <!-- <h5 class="white-text" id='quote'></h5> -->
+              <p class="grey-text text-lighten-4" id='quote'></p>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <div class="container">
+          © 2020 Lania
+          <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+          </div>
+        </div>
+      </footer>
+
+    <script>
+        const electron = require('electron');
+        const { ipcRenderer } = electron;
+
+        const ul = document.querySelector('ul');
+
+        // add item
+        ipcRenderer.on('item:add', (e, item) => {
+            ul.className = 'collection';
+
+            const li = document.createElement('li');
+            li.className = "collection-item";
+            const itemText = document.createTextNode(item);
+            li.appendChild(itemText);
+            ul.appendChild(li)
+        })
+
+        // clear items
+        ipcRenderer.on('item:clear', () => {
+            ul.innerHTML = '';
+            ul.className = '';
+        });
+
+        // remove items
+        // ul.addEventListener('dblclick', removeItem);
+        ul.addEventListener('dblclick', (e) => {
+            e.target.remove();
+            if(ul.children.length == 0) {
+                ul.className = '';
+            }
+        });
+
+        // handle function removeItem
+        // function removeItem(e) {
+        //     e.target.remove();
+        //     if(ul.children.length == 0) {
+        //         ul.className = '';
+        //     }
+        // }
+    </script>
+    <script>
+        require('./quote.js')
+    </script>
 </body>
 </html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Database Pycnometer</title>
+</head>
+<body>
+  <h1>DB Pycnometer</h1>
+  <div class="container">
+    <form>
+        <div>
+            <label>id pycnometer</label>
+            <input type="text" id="id_pycnometer" autofocus><br>
+            <label>pycnometer weight</label>
+            <input type="text" id="pycnometer_weight"><br>
+            <label>value m</label>
+            <input type="text" id="val_m"><br>
+            <label>value n</label>
+            <input type="text" id="val_n">
+        </div>
+        <button type="submit">
+            <i>send</i>
+        </button>
+    </form>
+  </div>
+
+  <div id="data">
+
+  </div>
+
+  <script>
+    const { inputData } = require('../controllers/pycnometer.js');
+
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      inputData();
+    });
+  </script>
+</body>
+</html>
