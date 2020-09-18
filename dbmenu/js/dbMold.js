@@ -6,29 +6,29 @@ const { BrowserWindow, Menu } = electron;
 
 let mainWindow;
 
-function dbPycnometer() {
+function dbMold() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    title: 'Add Data Pycnometer',
+    title: 'Add Data Mold',
     webPreferences: {
       nodeIntegration: true
     }
   });
 
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, '../views/dbPycnometer.html'),
+    pathname: path.join(__dirname, '../views/dbMold.html'),
     protocol: 'file',
     slashes: true
   }));
 
   mainWindow.on('close', () => {
-    mainWindow = null;
+    mainWindow = null
   });
 
   const menu = Menu.buildFromTemplate(menuTemplate);
 
-  mainWindow.setMenu(menu);
+  mainWindow.setMenu(menu)
 };
 
 const menuTemplate = [
@@ -59,8 +59,8 @@ function showData() {
   });
 
   mainShowData.loadURL(url.format({
-    pathname: path.join(__dirname, '../views/dbPycnometerAll.html'),
-    protocl: 'file',
+    pathname: path.join(__dirname, '../views/dbMoldAll.html'),
+    protocol: 'file',
     slashes: true
   }));
 
@@ -73,7 +73,7 @@ const mainShowDataTemplate = [
   {
     label: 'Quit',
     click() {
-      mainShowData.hide()
+      mainShowData.hide();
     }
   }
 ]
@@ -97,4 +97,4 @@ if(process.env.NODE_ENV !== 'production') {
   })
 }
 
-exports.dbPycnometer = dbPycnometer;
+exports.dbMold = dbMold;

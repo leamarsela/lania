@@ -8,6 +8,7 @@ const dbcontainer = require('./dbmenu/js/dbContainer.js');
 const dbproject = require('./dbmenu/js/dbProject.js');
 const dbringgamma = require('./dbmenu/js/dbRingGamma.js');
 const dbpycnometer = require('./dbmenu/js/dbPycnometer.js');
+const dbmold = require('./dbmenu/js/dbMold.js');
 
 // set ENV
 // process.env.NODE_ENV = 'production';
@@ -79,7 +80,7 @@ const mainMenuTemplate = [
           {
             label: 'Mold',
             click() {
-              console.log('Mold');
+              dbmold.dbMold();
             }
           },
           {
