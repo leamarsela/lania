@@ -21,6 +21,14 @@
     </form>
   </div>
 
-  <script src="../controllers/container.js"></script>
+  <script>
+    const { inputData } = require('../controllers/container.js');
+    
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      inputData()
+    });
+  </script>
 </body>
 </html>

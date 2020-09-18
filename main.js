@@ -9,6 +9,7 @@ const dbproject = require('./dbmenu/js/dbProject.js');
 const dbringgamma = require('./dbmenu/js/dbRingGamma.js');
 const dbpycnometer = require('./dbmenu/js/dbPycnometer.js');
 const dbmold = require('./dbmenu/js/dbMold.js');
+const dbconsolidation = require('./dbmenu/js/dbConsolidation.js');
 
 // set ENV
 // process.env.NODE_ENV = 'production';
@@ -90,9 +91,9 @@ const mainMenuTemplate = [
             }
           },
           {
-            label: 'consolidation',
+            label: 'Consolidation',
             click() {
-              console.log('consolidation');
+              dbconsolidation.dbConsolidation();
             }
           }
         ]

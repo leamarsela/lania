@@ -1,16 +1,13 @@
-const electron = require('electron');
+const electron =  require('electron');
 const path = require('path');
 const url = require('url');
 
 const { BrowserWindow, Menu } = electron;
 
 let mainWindow;
-let parentWindow;
 
-function dbRingGamma() {
+function dbConsolidation() {
   mainWindow = new BrowserWindow({
-    parent: parentWindow,
-    modal: true,
     width: 800,
     height: 600,
     title: 'Add Data Ring Gamma',
@@ -20,7 +17,7 @@ function dbRingGamma() {
   });
 
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, '../views/dbRingGamma.html'),
+    pathname: path.join(__dirname, '../views/dbConsolidation.html'),
     protocol: 'file',
     slashes: true
   }));
@@ -31,7 +28,7 @@ function dbRingGamma() {
 
   const menu = Menu.buildFromTemplate(menuTemplate);
 
-  mainWindow.setMenu(menu)
+  mainWindow.setMenu(menu);
 };
 
 const menuTemplate = [
@@ -62,14 +59,10 @@ function showData() {
   });
 
   mainShowData.loadURL(url.format({
-    pathname: path.join(__dirname, '../views/dbRingGammaAll.html'),
+    pathname: path.join(__dirname, '../views/dbConsolidationAll.html'),
     protocol: 'file',
     slashes: true
   }));
-
-  mainShowData.on('close', () => {
-    mainShowData = null;
-  });
 
   const menu = Menu.buildFromTemplate(mainShowDataTemplate);
 
@@ -80,7 +73,7 @@ const mainShowDataTemplate = [
   {
     label: 'Quit',
     click() {
-      mainShowData.hide()
+      mainShowData.hide();
     }
   }
 ]
@@ -123,4 +116,4 @@ if(process.env.NODE_ENV !== 'production') {
   })
 }
 
-exports.dbRingGamma = dbRingGamma;
+exports.dbConsolidation = dbConsolidation;

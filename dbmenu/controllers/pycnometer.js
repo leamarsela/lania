@@ -28,7 +28,6 @@ function inputData() {
     }).finally(() => {
       knex.destroy()
     });
-
 };
 
 
@@ -56,7 +55,7 @@ function showDataAll() {
     }).finally(() => {
       knex.destroy()
     });
-}
+};
 
 module.exports = {
   inputData,

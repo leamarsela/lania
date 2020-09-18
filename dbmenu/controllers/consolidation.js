@@ -3,37 +3,37 @@ const knex = require('knex')(config);
 
 function inputData() {
 
-  const idRingGamma = document.querySelector('#id_ring_gamma').value;
-  const weightRingGamma = document.querySelector('#weight_ring_gamma').value;
-  const diameterRingGamma = document.querySelector('#diameter_ring_gamma').value;
-  const thickRingGamma = document.querySelector('#thick_ring_gamma').value;
+  const idConsolidation = document.querySelector('#id_consolidation').value;
+  const weightConsolidation = document.querySelector('#weight_consolidation').value;
+  const diameterConsolidation = document.querySelector('#diameter_consolidation').value;
+  const thickConsolidation = document.querySelector('#thick_consolidation').value;
   const createdAt = new Date();
 
-  const ringGamma = [
+  const consolidation = [
     {
-      'id_ring': idRingGamma,
-      'weight_ring': weightRingGamma,
-      'diameter_ring': diameterRingGamma,
-      'thick_ring': thickRingGamma,
+      'id_ring': idConsolidation,
+      'weight_ring': weightConsolidation,
+      'diameter_ring': diameterConsolidation,
+      'thick_ring': thickConsolidation,
       'created_at': createdAt,
-      'updated_at': null
+      'updated_at': null,
     }
   ]
 
-  knex('ring_gamma').insert(ringGamma)
+  knex('consolidation').insert(consolidation)
     .then(() => {
-      console.log('sukses')
+      console.log('sukses');
     }).catch((err) => {
       console.log(err);
     }).finally(() => {
-      knex.destroy()
+      knex.destroy();
     });
-};
+}
 
 
 function showDataAll() {
 
-  knex('ring_gamma').select('*')
+  knex('consolidation').select('*')
     .then((rows) => {
       
       for(row of rows) {
@@ -45,19 +45,19 @@ function showDataAll() {
           <td> ${row.weight_ring} </td>
           <td> ${row.diameter_ring} </td>
           <td> ${row.thick_ring} </td>
-          `;
+        `;
 
-        allData.appendChild(tr);
+        allData.appendChild(tr)
       }
 
     }).catch((err) => {
       console.log(err)
     }).finally(() => {
-      knex.destroy()
+      knex.destroy();
     });
 };
 
 module.exports = {
   inputData,
   showDataAll
-};
+}

@@ -4,20 +4,18 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Data Molds</title>
+  <title>Data Container</title>
 </head>
 <body>
   
   <div class="container">
-    <h3>DB Mold</h1><br>
+    <h3>DB Container</h1><br>
 
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">Id Mold</th>
-          <th scope="col">Weight Mold</th>
-          <th scope="col">Diameter Mold</th>
-          <th scope="col">Thick Mold</th>
+          <th scope="col">Id Container</th>
+          <th scope="col">Weight Container</th>
         </tr>
       </thead>
       <tbody id="all_data">
@@ -27,7 +25,7 @@
   </div>
 
   <script>
-   const { showDataAll } = require('../controllers/mold.js');
+   const { showDataAll } = require('../controllers/container.js');
 
    showDataAll();
   </script>
